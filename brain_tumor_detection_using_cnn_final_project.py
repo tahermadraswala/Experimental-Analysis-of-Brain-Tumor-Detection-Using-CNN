@@ -1,4 +1,4 @@
-# Brain Tumor Detection Using CNN - Aligned with Original Project Logic
+# Brain Tumor Detection Using CNN 
 
 # Install required packages
 !pip install -q kaggle tensorflow scikit-learn matplotlib seaborn
@@ -19,7 +19,7 @@ from sklearn.metrics import confusion_matrix, classification_report
 from google.colab import files
 
 # ==============================================================================
-# STEP 1: Kaggle Dataset Setup (Following Original Logic)
+# STEP 1: Kaggle Dataset Setup 
 # ==============================================================================
 
 # Upload kaggle.json file
@@ -46,10 +46,10 @@ files.upload()
 !ls
 
 # ==============================================================================
-# STEP 2: Load Testing Data (Following Original Approach)
+# STEP 2: Load Testing Data 
 # ==============================================================================
 
-# Define the path to the TESTING dataset first (as in original)
+# Define the path to the TESTING dataset first 
 dataset_path = "/content/datasets/Testing"
 categories = sorted(os.listdir(dataset_path))  # Sort for consistency
 
@@ -93,7 +93,7 @@ print("Testing dataset loaded successfully!")
 print(f"Total images: {len(data)}, Total labels: {len(labels)}")
 
 # ==============================================================================
-# STEP 3: Load Training Data (Following Original Approach)
+# STEP 3: Load Training Data 
 # ==============================================================================
 
 # Define the path to the TRAINING dataset
@@ -140,7 +140,7 @@ print("Training dataset loaded successfully!")
 print(f"Total training images: {len(train_data)}, Total training labels: {len(train_labels)}")
 
 # ==============================================================================
-# STEP 4: Combined Dataset Processing (Following Original Logic)
+# STEP 4: Combined Dataset Processing
 # ==============================================================================
 
 # Process both training and testing sets together for consistency
@@ -201,7 +201,7 @@ print("Training and testing datasets prepared successfully!")
 print(f"Training data: {len(final_train_data)}, Testing data: {len(final_test_data)}")
 
 # ==============================================================================
-# STEP 5: Data Visualization (Following Original Logic)
+# STEP 5: Data Visualization 
 # ==============================================================================
 
 # Display the first 5 images from the training set
@@ -247,7 +247,7 @@ print(f"Validation set: {len(X_val)} samples ({len(X_val)/(len(X_train)+len(X_va
 print(f"Testing set: {len(X_test)} samples ({len(X_test)/(len(X_train)+len(X_val)+len(X_test))*100:.1f}%)")
 
 # ==============================================================================
-# STEP 7: Label Encoding (Following Original Logic)
+# STEP 7: Label Encoding 
 # ==============================================================================
 
 # One-hot encoding
@@ -285,7 +285,7 @@ model = Sequential([
 model.summary()  # Print model architecture
 
 # ==============================================================================
-# STEP 9: Model Compilation (Following Original Logic)
+# STEP 9: Model Compilation 
 # ==============================================================================
 
 model.compile(optimizer=Adam(learning_rate=0.001),
@@ -293,18 +293,18 @@ model.compile(optimizer=Adam(learning_rate=0.001),
               metrics=['accuracy'])
 
 # ==============================================================================
-# STEP 10: Model Training (Following Original Logic)
+# STEP 10: Model Training 
 # ==============================================================================
 
 print("Starting model training...")
 history = model.fit(X_train, y_train,
                     validation_data=(X_val, y_val),
-                    epochs=10,  # Following original epochs
+                    epochs=10,  s
                     batch_size=32,
                     verbose=1)
 
 # ==============================================================================
-# STEP 11: Model Evaluation (Following Original Logic)
+# STEP 11: Model Evaluation 
 # ==============================================================================
 
 # Evaluate on test set
@@ -312,7 +312,7 @@ test_loss, test_accuracy = model.evaluate(X_test, y_test, verbose=0)
 print(f"Test Accuracy: {test_accuracy * 100:.2f}%")
 
 # ==============================================================================
-# STEP 12: Training History Visualization (Following Original Logic)
+# STEP 12: Training History Visualization 
 # ==============================================================================
 
 # Visualize training accuracy and loss
@@ -339,17 +339,17 @@ plt.tight_layout()
 plt.show()
 
 # ==============================================================================
-# STEP 13: Save Model (Following Original Logic)
+# STEP 13: Save Model 
 # ==============================================================================
 
 model.save("brain_tumor_detection_model.h5")
 print("Model saved as brain_tumor_detection_model.h5")
 
 # ==============================================================================
-# STEP 14: Data Augmentation Setup (Following Original Logic)
+# STEP 14: Data Augmentation Setup 
 # ==============================================================================
 
-# Data augmentation (as in original)
+# Data augmentation 
 train_datagen = ImageDataGenerator(
     rescale=1./255,
     rotation_range=30,
@@ -362,7 +362,7 @@ train_datagen = ImageDataGenerator(
 )
 
 # ==============================================================================
-# STEP 15: Predictions and Evaluation (Following Original Logic)
+# STEP 15: Predictions and Evaluation 
 # ==============================================================================
 
 # Predict on test images
@@ -386,10 +386,10 @@ for i in range(min(5, len(X_test))):
     plt.show()
 
 # ==============================================================================
-# STEP 16: Training History Validation (Following Original Logic)
+# STEP 16: Training History Validation 
 # ==============================================================================
 
-# Plot training and validation accuracy (additional check)
+# Plot training and validation accuracy 
 if 'history' in locals():
     plt.figure(figsize=(10, 6))
     plt.plot(history.history['accuracy'], label='Training Accuracy')
@@ -404,7 +404,7 @@ else:
     print("Training history not found. Make sure to assign the history object when training the model.")
 
 # ==============================================================================
-# STEP 17: Detailed Confusion Matrix (Following Original Logic)
+# STEP 17: Detailed Confusion Matrix 
 # ==============================================================================
 
 # Validate array shapes
@@ -428,7 +428,7 @@ else:
     plt.show()
 
 # ==============================================================================
-# STEP 18: Classification Report (Following Original Logic)
+# STEP 18: Classification Report 
 # ==============================================================================
 
 # Print classification report
@@ -451,7 +451,7 @@ for i in range(min(5, len(final_test_data))):
     plt.show()
 
 # ==============================================================================
-# STEP 19: Enhanced Data Augmentation (Following Original Logic)
+# STEP 19: Enhanced Data Augmentation 
 # ==============================================================================
 
 # Enhanced data augmentation setup
@@ -469,10 +469,10 @@ datagen = ImageDataGenerator(
 datagen.fit(final_train_data)
 
 # ==============================================================================
-# STEP 20: Transfer Learning Setup (Following Original Logic)
+# STEP 20: Transfer Learning Setup 
 # ==============================================================================
 
-# Load a pre-trained model without the top layer (as in original)
+# Load a pre-trained model without the top layer 
 base_model = VGG16(weights='imagenet', include_top=False, input_shape=(128, 128, 3))
 
 # Freeze the base model layers
@@ -493,7 +493,7 @@ print("Transfer learning model created successfully!")
 print(f"Transfer model can be trained using: transfer_model.fit(X_train, y_train, validation_data=(X_val, y_val), epochs=10)")
 
 # ==============================================================================
-# STEP 21: Single Image Prediction Function (Following Original Logic)
+# STEP 21: Single Image Prediction Function 
 # ==============================================================================
 
 def predict_new_image(model, img_path, categories):
